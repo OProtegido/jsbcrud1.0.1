@@ -7,3 +7,7 @@ html, body { font-family: Consolas, "Courier New", courier, Monospace; font-size
 #wrap>header>h1 { margin: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; text-align: center; }
 #wrap>header>h1 span:first-child { font-size: 1rem; font-weight: normal; letter-spacing: 0; }
 #wrap>header>h1 span:last-child { letter-spacing: 1.2rem; }
+
+#wrap>nav { display:flex; align-items: center; flex-wrap: wrap; }
+#wrap>nav>a { padding: 0 .25rem; }
+#wrap>nav span:last-child { margin-left: auto; }
