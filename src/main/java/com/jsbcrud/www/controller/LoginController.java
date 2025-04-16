@@ -3,6 +3,7 @@ package com.jsbcrud.www.controller;
 import com.jsbcrud.www.config.Config;
 import com.jsbcrud.www.model.Account;
 import com.jsbcrud.www.repository.AccountRepository;
+import com.jsbcrud.www.util.HashUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,14 +33,13 @@ public class LoginController {
     public String doLogin(
             @RequestParam String email,
             @RequestParam String password,
-            HttpServletRequest request,
             HttpServletResponse response,
             Model model
     ) {
-        Optional<Account> userOpt = accountRepository.findByEmail(email);
+        Optional<Account> userOpt = accountRepository.findByEmailAndStatus(email, Account.Status.ON);
 
         if (userOpt.isPresent()) {
-            String hashedPassword = com.jsbcrud.www.util.HashUtil.sha256(password);
+            String hashedPassword = HashUtil.sha256(password);
 
             if (userOpt.get().getPassword().equals(hashedPassword)) {
                 // Criar cookie persistente
@@ -58,6 +58,7 @@ public class LoginController {
         model.addAttribute("disable_nav", true); // Oculta <nav>
         return "login";
     }
+
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         Cookie loginCookie = new Cookie("user", "");
@@ -66,4 +67,5 @@ public class LoginController {
         response.addCookie(loginCookie);
         return "redirect:/login";
     }
+
 }

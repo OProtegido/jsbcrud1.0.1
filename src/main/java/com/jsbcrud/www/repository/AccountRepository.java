@@ -6,4 +6,13 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByEmail(String email);
+    Optional<Account> findById(Integer id);
+    Optional<Account> findByEmailAndStatus(String email, Account.Status status);
 }
+    /*
+    @Query(value = "SELECT * FROM account WHERE email = :email", nativeQuery = true)
+    Optional<Account> findByEmail(@Param("email") String email);
+
+    @Query(value = "SELECT * FROM account WHERE id = :id", nativeQuery = true)
+    Optional<Account> findById(@Param("id") Integer id);
+    */
