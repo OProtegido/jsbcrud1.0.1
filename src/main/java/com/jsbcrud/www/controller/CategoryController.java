@@ -58,6 +58,7 @@ public class CategoryController {
 
         return "redirect:/cat/list";
     }
+
     @GetMapping("/new")
     public String newCatForm(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         // Obtém o usuário logado
@@ -73,6 +74,7 @@ public class CategoryController {
         model.addAttribute("category", new Category()); // Objeto vazio para o formulário
         return "cat/new";
     }
+
     @PostMapping("/new")
     public String createCat(@ModelAttribute Category category, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         // Obtém o usuário logado
@@ -92,6 +94,7 @@ public class CategoryController {
         redirectAttributes.addFlashAttribute("success", "Categoria '" + category.getName() + "' criada com sucesso!");
         return "redirect:/cat/new";
     }
+
     @GetMapping("/edit/{id}")
     public String editCategory(@PathVariable Integer id, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
@@ -114,6 +117,7 @@ public class CategoryController {
 
         return "cat/edit";
     }
+
     @PostMapping("/edit/{id}")
     public String updateCategory(@PathVariable Integer id,
                                  @RequestParam String name,
@@ -144,4 +148,5 @@ public class CategoryController {
 
         return "redirect:/cat/list";
     }
+
 }

@@ -42,7 +42,7 @@ public class LoginController {
             String hashedPassword = HashUtil.sha256(password);
 
             if (userOpt.get().getPassword().equals(hashedPassword)) {
-                // Criar cookie persistente
+                // Criar cookie
                 Cookie loginCookie = new Cookie("user", userOpt.get().getId().toString());
                 loginCookie.setMaxAge(config.getCookieHoursLive() * 60 * 60);
                 loginCookie.setHttpOnly(true);
@@ -67,5 +67,4 @@ public class LoginController {
         response.addCookie(loginCookie);
         return "redirect:/login";
     }
-
 }
